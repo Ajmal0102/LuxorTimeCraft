@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" th:href="@{/images/logo.png}" type="image/x-icon">
+    <title>OTP Verification</title>
+    <style>
+        body {
+            background-color: #E5E5E5;
+            font-family: Arial, sans-serif;
+            color: #FCA311;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #14213D;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center contents horizontally */
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #FCA311;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"] {
+            background-color: #FCA311;
+            color: #0F2237;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #DAA520;
+        }
+
+        p {
+
+            color: red;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="container">
+    <h3>OTP Verification</h3>
+    <form method="post" th:action="@{/getOtpPage}">
+        <input type="text" placeholder="Enter your OTP" name="otp">
+        <input type="hidden" th:value="${user.email}" name="email">
+        <input type="submit" value="Submit">
+        <p class="alert" th:text="${message}"></p> <!-- Added the "alert" class to the p tag -->
+    </form>
+</div>
+</body>
+</html>

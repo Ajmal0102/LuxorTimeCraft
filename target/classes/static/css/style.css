@@ -1,0 +1,78 @@
+body{
+ background-color:#0F2237;
+}
+ /* Modify the background color */
+    .navbar-custom,
+     .admin-box
+     {
+        background-color: #21446B;
+    }
+    /* Modify brand and text color */
+    .navbar-custom .navbar-brand,
+    .navbar-custom .navbar-text ,
+    .admin-card,
+    .product-add,
+    .cart-table{
+        color: #FCA311;
+
+    }
+
+.card{
+  background-color: #010103;
+  border-radius: 30px;
+  overflow: hidden;
+  word-wrap: normal!important;
+}
+.card-img {
+  height: 30vh;
+  object-fit: contain;
+}
+.card:hover .card-img {
+  transform: scale(1.1);
+}
+
+.card-body {
+
+  align-items: center;
+
+}
+.card-title {
+  letter-spacing: 1px;
+  margin-top: 10px;
+}
+.card-body .price {
+  font-size: 2.5rem;
+}
+.card-body .price span {
+  text-decoration: line-through;
+  font-size: 1.8rem;
+}
+/* Custom toggle button color */
+.custom-toggler .navbar-toggler-icon {
+  color: #FCA311;
+}
+
+footer,
+footer section {
+  background: #14213D;
+  margin-top: 15%; /* Adjust the percentage as needed */
+}
+
+
+footer section a i:hover {
+  color: #d3ad7f;
+}
+footer .style-name {
+  color: #FFD800;
+  margin-left: 5px;
+}
+footer .style-name:hover {
+  color: #d3ad7f;
+  border-bottom: 0.1rem solid #d3ad7f;
+  padding-bottom: 0.2rem;
+}
+#categorySelect,#categorySelect1 {
+  background-color: #21446B;
+  color: #FFD800;
+}
+
