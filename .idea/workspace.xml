@@ -4,7 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="738bbdad-1f29-46d0-ad05-e1e0a9cf0f03" name="Changes" comment="" />
+    <list default="true" id="738bbdad-1f29-46d0-ad05-e1e0a9cf0f03" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Entity/Cart.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Repository/CartRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/CartService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/CartServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/shopping-cart-png-512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/404.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/cart.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Controller/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Controller/CartController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/CustomUserDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/CustomUserDetailsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/ProductServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/shop.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/shop.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/viewProduct.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/viewProduct.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/shop.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/shop.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/viewProduct.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/viewProduct.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,8 +40,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="HTML File" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -60,24 +83,28 @@
   &quot;associatedIndex&quot;: 0
 }</component>
   <component name="ProjectId" id="2ZWl8BK0KH3ZZVojWqTKRvtJFZ5" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.TimeCraftApplication.executor": "Debug",
+    "Application.TimeCraftApplication.executor": "Run",
     "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/user/Desktop/TimeCraft/src/main/resources/templates",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
+    "last_opened_file_path": "/home/user/Desktop/TimeCraft/src/main/resources/static/images",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/static/images" />
       <recent name="$PROJECT_DIR$/src/main/resources/templates" />
       <recent name="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service" />
       <recent name="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft" />

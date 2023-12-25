@@ -38,4 +38,9 @@ public class ProductServiceImpl implements ProductService{
     public List<Product> getAllProductsByCategoryId(long id) {
         return productRepository.findAllByCategory_Id(id);
     }
+
+    @Override
+    public Optional<Product> findById(Long productId) {
+        return productRepository.findById(productId);
+    }
 }

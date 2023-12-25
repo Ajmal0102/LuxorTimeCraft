@@ -6,7 +6,6 @@ import com.ajmal.TimeCraft.otp.repository.OtpRepository;
 import com.ajmal.TimeCraft.Repository.RoleRepository;
 import com.ajmal.TimeCraft.Service.UserService;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

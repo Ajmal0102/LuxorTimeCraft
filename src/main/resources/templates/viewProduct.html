@@ -63,10 +63,10 @@
                     <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#">logout</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/cart}" href="#">cart</a>
+                    <a class="nav-link" th:href="@{/cart/view-cart}" href="#">cart</a>
                 </li>
                 <li class="nav-item active">
-                    <span class="nav-link" th:text="${cartCount}"></span>
+                    <span class="nav-link" th:text="${quantity}"></span>
                 </li>
             </ul>
 
@@ -89,8 +89,8 @@
                     <spna th:text="${product.quantity}"></spna> Left.
                 </h5>
                 <p th:text="${product.description}"></p>
-                <a href="" th:href="@{/addToCart/{id}(id = ${product.id})}" class="btn btn-outline-primary">Add to cart</a>
-                <a href="" th:href="@{/addToWishlist/{id}(id = ${product.id})}" class="btn btn-outline-primary">Add to Wishlist</a>
+                <a th:href="@{/cart/add-to-cart/{id}(id=${product.id})}" class="btn btn-outline-primary">Add to cart</a>
+                <a th:href="@{/addToWishlist/{id}(id=${product.id})}" class="btn btn-outline-primary">Add to Wishlist</a>
 
 
             </div>
