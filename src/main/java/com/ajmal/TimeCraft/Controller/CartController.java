@@ -51,34 +51,55 @@ public class CartController {
         return "cart";
     }
 
+//    @GetMapping("/add-to-cart/{id}")
+//    public String addToCart(@PathVariable("id") Long productId,
+//                            @AuthenticationPrincipal(expression = "email") String email,
+//                            Model model){
+//
+//        Product product = productService.getProductById(productId).orElse(null);
+//        System.out.println(product);
+//
+//
+//        Optional<User> user = userService.findUserByEmail(email);
+//
+//        User user1=user.get();
+//
+//        int currentStock = product.getQuantity();
+//
+//        if (currentStock>=1) {
+//            Cart existingCartItem = cartService.findCartItem(user1, product);
+//
+//            System.out.println("eeeeeeeeeeeeeee"+existingCartItem);
+//            System.out.println("User: " + user);
+//            System.out.println("Product: " + product);
+//            if (existingCartItem != null) {
+//                System.out.println("Cart is not null");
+//                existingCartItem.setQuantity(existingCartItem.getQuantity() + 1);
+//                cartService.saveToCart(existingCartItem);
+//            } else {
+//
+//                Cart cartItem = new Cart();
+//                cartItem.setProduct(product);
+//                cartItem.setUser(user1);
+//                cartItem.setQuantity(1);
+//                cartService.saveToCart(cartItem);
+//            }
+//        }
+//        return "redirect:/cart/view-cart";
+//    }
+
     @GetMapping("/add-to-cart/{id}")
     public String addToCart(@PathVariable("id") Long productId,
                             @AuthenticationPrincipal(expression = "email") String email,
+                            @RequestParam(name = "quantity", defaultValue = "1") int quantity,
                             Model model) {
 
         Product product = productService.getProductById(productId).orElse(null);
-
         Optional<User> userOptional = userService.findUserByEmail(email);
 
-        if (userOptional.isPresent()) {
+        if (userOptional.isPresent() && product != null) {
             User user = userOptional.get();
-
-            int currentStock = product.getQuantity();
-
-            if (currentStock >= 1) {
-                Cart existingCartItem = cartService.findCartItem(Optional.of(user), product);
-
-                if (existingCartItem != null) {
-                    existingCartItem.setQuantity(existingCartItem.getQuantity() + 1);
-                    cartService.saveToCart(existingCartItem);
-                } else {
-                    Cart cartItem = new Cart();
-                    cartItem.setProduct(product);
-                    cartItem.setUser(user);
-                    cartItem.setQuantity(1);
-                    cartService.saveToCart(cartItem);
-                }
-            }
+            cartService.addToCart(user, product, quantity);
         }
 
         return "redirect:/cart/view-cart";
@@ -94,4 +115,10 @@ public class CartController {
 
         return "redirect:/cart/view-cart";
     }
+
+//    @GetMapping("/checkout")
+//    public String cartCheckout() {
+//
+//        return "";
+//    }
 }

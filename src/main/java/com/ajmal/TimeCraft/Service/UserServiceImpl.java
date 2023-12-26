@@ -39,6 +39,10 @@ public class UserServiceImpl implements UserService{
         return users;
     }
 
+//    @Override
+//    public Optional<User> findUserByEmail(String email) {
+//        return userRepository.findUserByEmail(email);
+//    }
     @Override
     public Optional<User> findUserByEmail(String email) {
         return userRepository.findUserByEmail(email);
@@ -78,7 +82,7 @@ System.out.println("in post register");
     @Override
     public int verifyAccount(String email, String incomingOtp) {
         Optional<User> optionalUser = userRepository.findUserByEmail(email);
-        if(optionalUser.isPresent()){
+        if(optionalUser!=null){
             User user = optionalUser.get();
             Otp otp = otpRepository.findByUser(user);
             if(otp.getOtp().equals(incomingOtp)){

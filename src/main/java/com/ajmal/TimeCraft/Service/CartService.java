@@ -13,10 +13,11 @@ public interface CartService {
 
     Double findTotal(List<Cart> cart);
 
-    Cart findCartItem(Optional<User> user, Product product);
+    Cart findCartItem(User user, Product product);
 
     void saveToCart(Cart cartItem);
 
-    void removeFromCart(Long productId, String email);
+    public Cart addToCart(User user, Product product, int quantity);
 
+    void removeFromCart(Long productId, String email);
 }

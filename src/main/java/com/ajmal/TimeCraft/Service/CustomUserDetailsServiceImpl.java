@@ -28,6 +28,7 @@ public class CustomUserDetailsServiceImpl implements CustomUserDetailsService{
         } else {
             throw new UsernameNotFoundException("User not found.");
         }
+
         return user.map(CustomUserDetail::new).get();
     }
 }

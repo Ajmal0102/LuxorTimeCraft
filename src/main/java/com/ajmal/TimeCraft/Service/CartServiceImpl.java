@@ -7,6 +7,7 @@ import com.ajmal.TimeCraft.Repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,9 +32,46 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Cart findCartItem(Optional<User> user, Product product) {
-        return cartRepository.findByUserAndProduct(user,product);
+    public Cart findCartItem(User user, Product product) {
+        return null;
     }
+
+    public Cart addToCart(User user, Product product, int quantity) {
+        Cart existingCartItem = cartRepository.findByUserAndProduct(user, product);
+
+        if (existingCartItem != null) {
+            // Cart item already exists, update the quantity
+            existingCartItem.setQuantity(existingCartItem.getQuantity() + quantity);
+            return cartRepository.save(existingCartItem);
+        } else {
+            // Cart item doesn't exist, create a new one
+            Cart newCartItem = new Cart();
+            newCartItem.setUser(user);
+            newCartItem.setProduct(product);
+            newCartItem.setQuantity(quantity);
+            return cartRepository.save(newCartItem);
+        }
+    }
+
+
+
+//    @Override
+//    public Cart findCartItem(User userOptional, Product product) {
+//        User user = userOptional;
+//
+//        System.out.println("User in findCartItem: " + user.getId()+"name :"+user.getFirstName());
+//        System.out.println("Product in findCartItem: " + product);
+//
+//     Cart cart=cartRepository.findByUserAndProduct(user, product);
+//     try {
+//         System.out.println("Cart is ...." + cart);
+//     }catch (Exception e){
+//         System.out.println("Cart is null");
+//         e.printStackTrace();
+//
+//     }
+//        return cart;
+//    }
 
     @Override
     public void saveToCart(Cart cartItem) {

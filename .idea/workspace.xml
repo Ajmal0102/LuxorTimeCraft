@@ -4,29 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="738bbdad-1f29-46d0-ad05-e1e0a9cf0f03" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Entity/Cart.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Repository/CartRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/CartService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/CartServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/shopping-cart-png-512.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/404.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/cart.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+    <list default="true" id="738bbdad-1f29-46d0-ad05-e1e0a9cf0f03" name="Changes" comment="Single Product To The Cart">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Controller/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Controller/CartController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Entity/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Entity/Cart.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Repository/CartRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Repository/CartRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/CartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/CartService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/CartServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/CartServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/CustomUserDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/CustomUserDetailsServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/ProductServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/shop.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/shop.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/viewProduct.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/viewProduct.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/shop.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/shop.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/viewProduct.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/viewProduct.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/cart.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +39,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="5" />
     <option name="recentBranches">
       <RecentBranches>
         <option name="branchesForRepo">
@@ -98,7 +89,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/user/Desktop/TimeCraft/src/main/resources/static/images",
+    "last_opened_file_path": "/home/user/Desktop/TimeCraft",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
@@ -151,6 +142,30 @@
       <option name="presentableId" value="Default" />
       <updated>1702545554710</updated>
     </task>
+    <task id="LOCAL-00001" summary="Single Product To The Cart">
+      <option name="closed" value="true" />
+      <created>1703506700719</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1703506700719</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Single Product To The Cart" />
+    <option name="LAST_COMMIT_MESSAGE" value="Single Product To The Cart" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Controller/CartController.java</url>
+          <line>87</line>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
