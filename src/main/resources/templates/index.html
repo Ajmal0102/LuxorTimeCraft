@@ -18,6 +18,9 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.fontawesome.com/light/6.0.0-beta2/css/all.min.css">
+    <!--For Icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-XXpdL99iit9vt8jZpMLKjIeRmRflSO+c/2WF8c8fbm5ZWxMx6R5p/ZL8UfBksfNfl9kE1DJZ5x8Qxu4WvZ2zg==" crossorigin="anonymous" />
+
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <title>Home | LuxorTimeCraft</title>
 
@@ -58,23 +61,32 @@
             <ul class="navbar-nav mr-auto"></ul>
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/}" href="#">home</a>
+                    <a class="nav-link" th:href="@{/}" href="#"><i class="fas fa-home"></i> Home
+                    </a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/shop}" href="#">shop</a>
+                    <a class="nav-link" th:href="@{/shop}" href="#"><i class="fas fa-shopping-cart"></i> Shop
+                    </a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}" href="#">login</a>
+                    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}" href="#"><i class="fas fa-sign-in-alt"></i> Login
+                    </a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#">logout</a>
+                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#"><i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/cart/view-cart}" href="#">cart</a>
+                    <a class="nav-link" th:href="@{/cart/view-cart}" href="#"><i class="fas fa-shopping-cart"></i> Cart
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#"><i class="fas fa-user"></i> User Profile
+                    </a>
                 </li>
                 <li class="nav-item active">
                     <span class="nav-link" th:text="${cartCount}">0</span>
-                </li>40
+                </li>
             </ul>
 
         </div>

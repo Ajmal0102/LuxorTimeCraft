@@ -12,10 +12,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -116,9 +113,32 @@ public class CartController {
         return "redirect:/cart/view-cart";
     }
 
-//    @GetMapping("/checkout")
-//    public String cartCheckout() {
+    @PostMapping("/update-cart")
+    public String itemQuantityUpdate(@RequestParam String id,
+                                     @RequestParam int newQuantity,
+                                     @AuthenticationPrincipal(expression = "email") String email){
+
+
+
+        Optional<Cart> optionalCartItem = cartService.getCartById(id);
+        if (newQuantity == 0) {
+            cartService.removeFromCart(optionalCartItem.get().getProduct().getId(),email);
+
+        } else if (optionalCartItem.isPresent()) {
+
+            Cart cartItem = optionalCartItem.get();
+            cartItem.setQuantity(newQuantity);
+            cartService.saveToCart(cartItem);
+        }
+
+//        if (optionalCartItem.isPresent()) {
 //
-//        return "";
-//    }
+//            Cart cartItem = optionalCartItem.get();
+//            cartItem.setQuantity(newQuantity);
+//            cartService.saveToCart(cartItem);
+//
+//        }
+
+        return "redirect:/cart/view-cart";
+    }
 }

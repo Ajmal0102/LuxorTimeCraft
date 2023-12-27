@@ -163,20 +163,14 @@
                                                     <p style="color: grey;" class="mb-0">
                                                         <span><strong>₹ <span th:text="${item.product.price}">price</span></strong></span>
                                                     </p>
-                                                    <!-- <p id="variantDiscount" th:if="${item.variant.discountedPrice != 0}" style="color:green">
-                                                      Discounted Price: ₹ <span th:text="${item.variant.discountedPrice}"></span>
-                                                    </p> -->
-                                                    <!-- <div class="mt-2 quantity-input">
-                                                      <form th:action="@{/cart/update-cart}" method="post">
-                                                        <input type="hidden" name="id" th:value="${item.variant.id}">
-                                                        <button class="quantity-button decrease" type="submit" name="newQuantity" th:value="${item.quantity - 1}" data-item-id="1">-</button>
-                                                        <input type="number" id="quantityItem1" class="item-quantity" th:value="${item.quantity}" data-item-id="1">
-                                                        <button class="quantity-button increase" type="submit" name="newQuantity" th:value="${item.quantity + 1}" data-item-id="1">+</button>
-                                                      </form>
-                                                    </div> -->
-
-
-                                                    <!--                                                <p class="mb-2 text-uppercase small">Category: <span th:text="${item.category.name}"></span></p>-->
+                                                    <div class="mt-2 quantity-input">
+                                                        <form th:action="@{/cart/update-cart}" method="post" class="d-flex align-items-center">
+                                                            <input type="hidden" name="id" th:value="${item.id}">
+                                                            <button class="btn btn-outline-secondary quantity-button decrease" type="submit" name="newQuantity" th:value="${item.quantity - 1}" data-item-id="1">-</button>
+                                                            <input type="number" id="quantityItem1" class="form-control item-quantity mx-2 text-center" th:value="${item.quantity}" data-item-id="1">
+                                                            <button class="btn btn-outline-secondary quantity-button increase" type="submit" name="newQuantity" th:value="${item.quantity + 1}" data-item-id="1">+</button>
+                                                        </form>
+                                                    </div>
 
                                                 </div>
 
@@ -187,6 +181,7 @@
                                                     <a href="#" th:href="@{/cart/remove-from-cart/{id}(id=${item.product.id})}"
                                                        class="btn btn-danger"
                                                     >Delete</a>
+
 
 
 

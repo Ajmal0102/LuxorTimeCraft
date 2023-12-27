@@ -7,6 +7,7 @@ import com.ajmal.TimeCraft.Repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.event.ListDataEvent;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -97,5 +98,29 @@ public class CartServiceImpl implements CartService {
             }
         }
     }
+
+    @Override
+    public void updateCartItemQuantity(String email, Long id, int newQuantity) {
+
+//        Cart existingCartItem = cartRepository.findByUserAndProduct(user, cartRepository.findByProductId(id));
+
+//        existingCartItem.setQuantity(newQuantity);
+//        cartRepository.save(existingCartItem);
+//        Product product = cartRepository.findByProductId(id);
+
+//        List<Cart> existingCartItem = cartRepository.findByUser_EmailAndProduct_Id(email,id);
+
+//        Cart existingCartItem = cartRepository.findByUserAndProduct(user, cartRepository.findByProductId(id));
+//        existingCartItem.setQuantity(newQuantity);
+//        cartRepository.save(existingCartItem);
+
+    }
+
+    @Override
+    public Optional<Cart> getCartById(String id) {
+        return cartRepository.findById(id);
+    }
+
+
 
 }

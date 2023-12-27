@@ -20,4 +20,11 @@ public interface CartService {
     public Cart addToCart(User user, Product product, int quantity);
 
     void removeFromCart(Long productId, String email);
+
+
+    void updateCartItemQuantity(String email, Long id, int newQuantity);
+
+    Optional<Cart> getCartById(String id);
+
+
 }

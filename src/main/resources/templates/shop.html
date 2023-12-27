@@ -13,7 +13,7 @@
     <title>Shop | LuxorTimeCraft</title>
 
     <style>
-        .card {
+        .card{
             border-radius: 20px;
             background-color: #14213D;
             color: #fff;
@@ -71,31 +71,36 @@
         </div>
     </div>
 </nav>
-<div class="container" style="margin-top: 30px">
+<div class="container mt-5">
     <div class="row">
-        <div class="col-sm-3">
-            <h4>Categories</h4>
-            <div class="dropdown">
-                <button style="background-color: #14213D; color: #FFFFFF;" class="btn dropdown-toggle" type="button" id="categoryDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Select a Category
-                </button>
-                <div class="dropdown-menu" aria-labelledby="categoryDropdown">
-                    <a class="dropdown-item" th:href="@{/shop}">All Products</a>
-                    <a th:each="category, iStat : ${categories}" class="dropdown-item" th:href="@{/shop/category/{id}(id=${category.id})}" th:text="${category.categoryName}"></a>
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <div class="card-header" style="background-color: #14213D; color: #FFFFFF; border-radius: 20px;">
+                    <h4>Categories</h4>
+                </div>
+                <div class="card-body">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="categoryDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Select a Category
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="categoryDropdown">
+                            <a class="dropdown-item" th:href="@{/shop}">All Products</a>
+                            <a th:each="category, iStat : ${categories}" class="dropdown-item" th:href="@{/shop/category/{id}(id=${category.id})}" th:text="${category.categoryName}"></a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-9">
-            <div class="card" style="margin-top: 20px" th:each="product : ${products}">
-                <div class="row no-gutters">
-                    <div class="col-sm-5 d-flex justify-content-center mt-4">
-                        <img class="imgDiv" height="150px" width="150px" th:src="@{${'/productImages/' + product.imageName}}" th:alt="${product.name}">
-                    </div>
-                    <div class="col-sm-7 d-flex justify-content-center">
+
+        <div class="col-md-9">
+            <div class="row">
+                <div th:each="product : ${products}" class="col-md-4 mb-4">
+                    <div class="card">
+                        <img class="card-img-top imgDiv" th:src="@{${'/productImages/' + product.imageName}}" th:alt="${product.name}">
                         <div class="card-body">
                             <h5 class="card-title" th:text="${product.name}"></h5>
-                            <h4>₹ <span th:text="${product.price}"></span></h4>
-                            <p th:text="${product.description}" >Suresh Dasari is a founder and technical lead developer in tutlane.</p>
+                            <p class="card-text" th:text="${product.description}"></p>
+                            <h4 class="card-text">₹ <span th:text="${product.price}"></span></h4>
                             <a href="#" th:href="@{/shop/viewproduct/{id}(id=${product.id})}" class="btn btn-primary">View Product</a>
                         </div>
                     </div>
@@ -104,6 +109,7 @@
         </div>
     </div>
 </div>
+
 
 
 
