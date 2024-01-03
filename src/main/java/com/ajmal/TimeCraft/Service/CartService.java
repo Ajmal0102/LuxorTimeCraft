@@ -22,9 +22,10 @@ public interface CartService {
     void removeFromCart(Long productId, String email);
 
 
-    void updateCartItemQuantity(String email, Long id, int newQuantity);
 
     Optional<Cart> getCartById(String id);
 
+
+    List<Cart> findByUser_Id(Long userId);
 
 }

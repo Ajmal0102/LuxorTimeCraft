@@ -90,7 +90,7 @@
                 </h5>
                 <p th:text="${product.description}"></p>
                 <a th:href="@{/cart/add-to-cart/{id}(id=${product.id})}" class="btn btn-outline-primary">Add to cart</a>
-                <a th:href="@{/addToWishlist/{id}(id=${product.id})}" class="btn btn-outline-primary">Add to Wishlist</a>
+                <a th:href="@{/addToWishlist/{id}(id=${product.id})}" class="btn btn-outline-primary"><i class="fas fa-heart"></i> Add to Wishlist</a>
 
 
             </div>

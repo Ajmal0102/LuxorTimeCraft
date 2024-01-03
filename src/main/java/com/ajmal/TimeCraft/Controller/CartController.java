@@ -1,8 +1,10 @@
 package com.ajmal.TimeCraft.Controller;
 
+import com.ajmal.TimeCraft.Entity.Address;
 import com.ajmal.TimeCraft.Entity.Cart;
 import com.ajmal.TimeCraft.Entity.Product;
 import com.ajmal.TimeCraft.Entity.User;
+import com.ajmal.TimeCraft.Service.AddressService;
 import com.ajmal.TimeCraft.Service.CartService;
 import com.ajmal.TimeCraft.Service.ProductService;
 import com.ajmal.TimeCraft.Service.UserService;
@@ -13,7 +15,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.security.Principal;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +34,9 @@ public class CartController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    AddressService addressService;
 
     @GetMapping("/view-cart")
     public String viewCart(Model model, @AuthenticationPrincipal(expression = "email") String email){
@@ -118,8 +126,6 @@ public class CartController {
                                      @RequestParam int newQuantity,
                                      @AuthenticationPrincipal(expression = "email") String email){
 
-
-
         Optional<Cart> optionalCartItem = cartService.getCartById(id);
         if (newQuantity == 0) {
             cartService.removeFromCart(optionalCartItem.get().getProduct().getId(),email);
@@ -131,14 +137,82 @@ public class CartController {
             cartService.saveToCart(cartItem);
         }
 
-//        if (optionalCartItem.isPresent()) {
+
+
+
+        return "redirect:/cart/view-cart";
+    }
+
+    @GetMapping("/checkout")
+    public String getCheckout(Model model,@AuthenticationPrincipal(expression = "id") Long user_id,
+                              RedirectAttributes redirectAttributes){
+
+
+
+//        Optional<User> optionalUser = userService.findById(user_id);
 //
-//            Cart cartItem = optionalCartItem.get();
-//            cartItem.setQuantity(newQuantity);
-//            cartService.saveToCart(cartItem);
+//        if(optionalUser.isPresent()){
+//            User user =optionalUser.get();
+//            List<Address> addressList = addressService.findAllUserAddresses(user);
+//
+//
+//            model.addAttribute("Addresses",addressList);
+//            model.addAttribute("user",user);
+//
+//
+//            Cart cart = user.getCart();
+//
+//            List<CartItems> cartItems = cart.getCartItems();
+//            model.addAttribute("cartItems",cartItems);
+//
+//            double totalPrice = cartItems.stream()
+//                    .mapToDouble(cartItem -> cartItem.getVariant().getPrice() * cartItem.getQuantity())
+//                    .sum();
+//            double totalPrice = cart.getTotal();
+//            model.addAttribute("totalPrice",totalPrice);
 //
 //        }
 
-        return "redirect:/cart/view-cart";
+        List<Cart> cartItems = cartService.findByUser_Id(user_id);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        Optional<User> user = userService.findById(user_id);
+        Optional<User> optionalUser = userService.findById(user_id);
+
+
+
+        if (authentication == null) {
+            return "redirect:/login";
+        }
+
+
+        if(optionalUser.isPresent()){
+            User user =optionalUser.get();
+            List<Address> addressList = addressService.findAllUserAddresses(user);
+
+
+            model.addAttribute("Addresses",addressList);
+            model.addAttribute("user",user);
+
+
+//            Cart cart = user.getCart();
+//
+//            List<CartItems> cartItems = cart.getCartItems();
+//            model.addAttribute("cartItems",cartItems);
+
+//            double totalPrice = cartItems.stream()
+//                    .mapToDouble(cartItem -> cartItem.getVariant().getPrice() * cartItem.getQuantity())
+//                    .sum();
+            double totalPrice = cartService.findTotal(cartItems);
+            model.addAttribute("totalPrice",totalPrice);
+
+            model.addAttribute("total", cartService.findTotal(cartItems));
+            model.addAttribute("cartItems", cartItems);
+            model.addAttribute("user", user);
+
+        }
+
+
+
+        return "checkout";
     }
 }

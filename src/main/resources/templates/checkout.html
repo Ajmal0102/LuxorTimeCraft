@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Page</title>
+    <link rel="icon" th:href="@{/images/logo.png}" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Checkout</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        #checkout-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .methods {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: baseline;
+        }
+
+        .methods li {
+            margin-left: 1rem;
+        }
+
+        .delivery {
+            background-color: #f5f5f5;
+            padding: 2rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .total_price_tag {
+            margin-left: 15em;
+        }
+
+        #place_order {
+            padding: 14px 25px;
+            border-radius: 6px;
+            background-color: #FCA311;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .add_address {
+            color: blue;
+            text-decoration: none;
+            outline: none;
+            margin-left: 1rem;
+        }
+
+        .add_address:hover {
+            color: #007bff;
+        }
+
+        .head {
+            color: #FCA311;
+            margin-top: 2rem;
+        }
+
+        .product_details {
+            list-style: none;
+            margin: 35px 0px 0px -35px;
+        }
+
+        .list-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .coupon {
+            margin-top: 1rem;
+        }
+
+        .message {
+            color: red;
+            text-align: center;
+        }
+
+        .message-success {
+            color: green;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body style="background-color: #E5E5E5;">
+<nav style="background-color: #14213D;" class="navbar navbar-expand-lg  navbar-custom" >
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img th:src="@{/images/logo.png}"  src="../static/images/logo.png" width="auto" height="40" class="d-inline-block align-top" alt=""/>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span style="font-size: 24px; color: #FCA311;" class="navbar-toggler-icon">&#9776;</span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto"></ul>
+            <ul class="navbar-nav">
+                <li class="nav-item active ">
+                    <a style="color:#FCA311;" class="nav-link" th:href="@{/}" href="#">home</a>
+                </li>
+                <li   class="nav-item active ">
+                    <a style="color:#FCA311;" class="nav-link" th:href="@{/shop}" href="#">shop</a>
+                </li>
+                <li   class="nav-item active ">
+                    <a style="color:#FCA311;" class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}" href="#">login</a>
+                </li>
+                <li   class="nav-item active ">
+                    <a style="color:#FCA311;" class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#">logout</a>
+                </li>
+                <li  class="nav-item active ">
+                    <a style="color:#FCA311;" class="nav-link" th:href="@{/cart}" href="#">cart</a>
+                </li>
+                <li class="nav-item active navbar-text">
+                    <strong style="color:#FCA311;" class="nav-link" th:text="${quantity}">0</strong>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+
+<div class="single-product-area" style="margin-top:5rem;">
+    <!-- <div th:if="${error}" class="message-success">
+        <p th:text="${error}"></p>
+    </div> -->
+
+    <!-- Display the error message for address selection -->
+    <!-- <div th:if="${errorAddress}" class="alert alert-danger">
+        <p th:text="${errorAddress}"></p>
+    </div> -->
+
+    <!-- Display the error message for payment method selection -->
+    <!-- <div th:if="${errorPayment}" class="alert alert-danger">
+        <p th:text="${errorPayment}"></p>
+    </div> -->
+
+    <div style="text-align: right;" class="mr-5">
+        <!-- <form th:action="@{/checkout/applyCoupon}" method="post">
+
+            Inside the form tag in your checkout page
+
+            <div class="coupon">
+                <label for="couponCode">Coupon Code:</label>
+                <input type="text" id="couponCode" name="couponCode">
+                <button type="submit" class="btn btn-warning" name="applyCoupon">Apply Coupon</button>
+            </div>
+
+             Display the success or error message for coupon
+
+            <p class="text-center text-danger" th:text="${invalidCoupon}"></p>
+            <p class="text-center text-success" th:text="${discountApplied}"></p>
+
+
+        </form> -->
+    </div>
+
+    <form enctype="multipart/form-data" th:action="@{/cart/placeOrder}" class="checkout" method="post" name="checkout">
+        <div class="container">
+            <div class="row" id="checkout-container">
+                <!-- Display the success message -->
+
+
+                <div class="col-md-6 price-details ">
+                    <h4 style="color:#FCA311">Select Address</h4>
+                    <th:block th:if="${#lists.isEmpty(Addresses)}">
+                        <p style="color:grey">No addresses found. Please add a new address:</p>
+                        <a class="btn btn-warning" th:href="@{'/user/add-address'+'?editSource=checkout'}">Add Address</a>
+
+
+
+                    </th:block>
+                    <!-- Display existing addresses -->
+                    <th:block th:unless="${#lists.isEmpty(Addresses)}">
+                        <ul th:if="${Addresses}" style="list-style:none;">
+                            <li th:each="address, iterStat : ${Addresses}">
+                                <div class="address-card" style="background-color: #14213D; color: grey; padding: 10px; border-radius: 10px; margin-bottom: 10px;">
+                                    <input type="radio" th:id="'address_' + ${iterStat.index}"
+                                           th:name="selectedAddressId" th:value="${address.id}" th:checked="${address.enabled}"/>
+                                    <strong th:text="${user.firstName}"></strong>
+
+                                    <div style="margin-top: 10px;">
+                                        <span th:text="${user.email}"></span>
+                                    </div>
+                                    <div style="margin-top: 10px;">
+                                        <span th:text="${address.houseName}"></span>
+                                    </div>
+                                    <div style="margin-top: 10px;">
+                                        <span th:text="${address.city + ', ' + address.state}"></span>
+                                    </div>
+                                    <div style="margin-top: 10px;">
+                                        <span th:text="${address.pincode}"></span>
+                                    </div>
+                                    <div style="margin-top: 10px;">
+                                        <span th:text="${address.landmark}"></span>
+                                        <a class="btn btn-warning ml-4"
+                                           th:href="@{'/user/update/'+${address.id} +'?editSource=checkout'}">Edit</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <a class="btn btn-success" th:href="@{'/user/add-address'+'?editSource=checkout'}">Add New Address</a>
+
+                    </th:block>
+                </div>
+
+                <!-- <div th:if="${message}" class="alert alert-danger">
+                    <p th:text="${message}"></p>
+                </div> -->
+
+                <div  style="background-color:#14213D; padding: 15px; border-radius: 10px;" class="col-md-4 delivery admin-box mt-4">
+                    <div class="head">
+                        <h3>Price details</h3>
+                        <h6 class="text-success" th:text="${couponApplied}"></h6>
+
+                        <hr style="border-top: 1px solid grey;">
+
+                    </div>
+                    <div>
+                        <ul class="product_details">
+                            <th:block th:each="cartItems : ${cartItems}">
+                                <li class="list-details">
+                                    <div class="price-quantity">
+                                        <span style="color:grey" th:text="${cartItems.product.name}"></span>(<span
+                                            style="color:green"  th:text="${cartItems.quantity}"></span>
+                                        )
+                                    </div>
+                                    <span style="color:grey" th:text="${cartItems.product.price}"></span>
+
+                                </li>
+                            </th:block>
+                        </ul>
+                        <div class="total">
+                            <div>
+                                <h4 style="color:#FFD800">Total Price : <strong style="color:white" th:text="${totalPrice}"></strong></h4>
+                            </div>
+<!--                            <div th:if="${coupon}">-->
+<!--                                <p th:text="'Applied coupon is '+${coupon}"></p>-->
+
+<!--                            </div>-->
+
+
+                        </div>
+                        <div class="col-md-4" style="margin-top: 2rem">
+                            <input style="color:black" class="btn btn-warning" type="submit" data-value="Place order" value="Place order"
+                                   id="place_order" name="place_order">
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+        <!-------------------------------------Payments---------------------------------->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8" id="payment" style="margin-top: 2rem">
+                    <ul class="payment_methods methods " style="color: #FCA311; list-style:none;">
+                        <li class="payment_method_cashOnDelivery">
+                            <input type="radio" data-order_button_text="" value="COD" th:name="paymentMethod"
+                                   class="input-radio" id="paymentMethodCOD">
+                            <label for="paymentMethodCOD"><strong>Cash on Delivery</strong> </label>
+                        </li>
+                        <!--
+                        <li class="payment_method_razorpay">
+                            <input type="radio" data-order_button_text="Proceed to RazorPay" value="RAZORPAY"
+                                   name="paymentMethod" class="input-radio" id="payment_method_razorpay">
+                            <label for="payment_method_razorpay">RazorPay</label>
+                        </li>
+                        <li class="payment_method_wallet-pay">
+                            <input type="radio" data-order_button_text="Proceed to WalletPay" value="WALLET"
+                                   name="paymentMethod" class="input-radio" id="payment_method_wallet">
+                            <label for="payment_method_wallet">Wallet</label>
+                        </li> -->
+                    </ul>
+                </div>
+                <!--                <input type="hidden" name="discountedTotalPrice" th:value="${discountedTotalPrice}"/>-->
+
+
+            </div>
+        </div><!-------payment end------------>
+    </form>
+
+
+</div>
+
+
+<script>
+    // Functions to open and close the modal
+    function openModal() {
+        document.getElementById('addressModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('addressModal').style.display = 'none';
+    }
+</script>
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>

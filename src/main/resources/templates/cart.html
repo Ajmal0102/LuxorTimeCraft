@@ -129,6 +129,9 @@
             <div th:if="${successMsg}" class="alert alert-success">
                 <p th:text="${successMsg}"></p>
             </div>
+            <div th:if="${not #strings.isEmpty(stockMessage)}" class="alert alert-warning">
+                <p th:text="${stockMessage}"></p>
+            </div>
 
             <!--Section: Block Content-->
             <section class="mt-5 mb-4">
@@ -138,7 +141,6 @@
 
                     <!--Grid column-->
                     <div class="col-lg-8">
-
                         <!-- Card -->
                         <div class="card wish-list mb-4">
                             <div class="card-body">

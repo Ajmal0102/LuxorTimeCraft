@@ -37,6 +37,7 @@ public class CartServiceImpl implements CartService {
         return null;
     }
 
+    @Override
     public Cart addToCart(User user, Product product, int quantity) {
         Cart existingCartItem = cartRepository.findByUserAndProduct(user, product);
 
@@ -99,28 +100,17 @@ public class CartServiceImpl implements CartService {
         }
     }
 
-    @Override
-    public void updateCartItemQuantity(String email, Long id, int newQuantity) {
 
-//        Cart existingCartItem = cartRepository.findByUserAndProduct(user, cartRepository.findByProductId(id));
-
-//        existingCartItem.setQuantity(newQuantity);
-//        cartRepository.save(existingCartItem);
-//        Product product = cartRepository.findByProductId(id);
-
-//        List<Cart> existingCartItem = cartRepository.findByUser_EmailAndProduct_Id(email,id);
-
-//        Cart existingCartItem = cartRepository.findByUserAndProduct(user, cartRepository.findByProductId(id));
-//        existingCartItem.setQuantity(newQuantity);
-//        cartRepository.save(existingCartItem);
-
-    }
 
     @Override
     public Optional<Cart> getCartById(String id) {
         return cartRepository.findById(id);
     }
 
+    @Override
+    public List<Cart> findByUser_Id(Long userId) {
+        return cartRepository.findByUser_Id(userId);
+    }
 
 
 }

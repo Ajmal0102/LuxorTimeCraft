@@ -4,16 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="738bbdad-1f29-46d0-ad05-e1e0a9cf0f03" name="Changes" comment="Add to cart and update the proper price to the cart.">
+    <list default="true" id="738bbdad-1f29-46d0-ad05-e1e0a9cf0f03" name="Changes" comment="Add to cart, Quantity updation, Price updation.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Controller/AddressController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Entity/Address.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Repository/AddressRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/AddressService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/AddressServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/profile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/address-form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/checkout.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/edit-user-address.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/user-address.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/user-dashboard.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Controller/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Controller/CartController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Controller/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Entity/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Entity/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Repository/CartRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Repository/CartRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/CartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/CartService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/CartServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ajmal/TimeCraft/Service/CartServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/cart.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/shop.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/shop.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/viewProduct.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/view-product.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/shop.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/shop.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/viewProduct.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,18 +96,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.TimeCraftApplication.executor&quot;: &quot;Run&quot;,
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/user/Desktop/TimeCraft&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.TimeCraftApplication.executor": "Run",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/user/Desktop/TimeCraft",
+    "settings.editor.selected.configurable": "project.propCompiler"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/static/images" />
@@ -155,12 +174,22 @@
       <option name="project" value="LOCAL" />
       <updated>1703579473884</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Add to cart, Quantity updation, Price updation.">
+      <option name="closed" value="true" />
+      <created>1703664967962</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1703664967962</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Single Product To The Cart" />
     <MESSAGE value="Add to cart and update the proper price to the cart." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add to cart and update the proper price to the cart." />
+    <MESSAGE value="Add to cart, Quantity updation, Price updation." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add to cart, Quantity updation, Price updation." />
   </component>
 </project>

@@ -9,6 +9,7 @@ package com.ajmal.TimeCraft.Entity;
     import lombok.NoArgsConstructor;
     import lombok.Setter;
 
+    import java.util.ArrayList;
     import java.util.List;
 
     @Entity
@@ -53,6 +54,9 @@ package com.ajmal.TimeCraft.Entity;
                 inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")}
         )
         private List<Role> roles;
+
+        @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
+        private List<Address> addresses = new ArrayList<>();
 
 
 
