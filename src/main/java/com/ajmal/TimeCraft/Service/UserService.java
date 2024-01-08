@@ -1,5 +1,6 @@
 package com.ajmal.TimeCraft.Service;
 
+import com.ajmal.TimeCraft.Entity.Cart;
 import com.ajmal.TimeCraft.Entity.User;
 
 import java.util.List;
@@ -22,5 +23,6 @@ public interface UserService {
     void otpManagement(User user);
 
     int verifyAccount(String email, String otp);
+
 
 }

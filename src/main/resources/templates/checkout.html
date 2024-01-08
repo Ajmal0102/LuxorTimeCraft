@@ -143,19 +143,19 @@
 
 
 <div class="single-product-area" style="margin-top:5rem;">
-    <!-- <div th:if="${error}" class="message-success">
+     <div th:if="${error}" class="message-success">
         <p th:text="${error}"></p>
-    </div> -->
+    </div>
 
     <!-- Display the error message for address selection -->
-    <!-- <div th:if="${errorAddress}" class="alert alert-danger">
+     <div th:if="${errorAddress}" class="alert alert-danger">
         <p th:text="${errorAddress}"></p>
-    </div> -->
+    </div>
 
     <!-- Display the error message for payment method selection -->
-    <!-- <div th:if="${errorPayment}" class="alert alert-danger">
+     <div th:if="${errorPayment}" class="alert alert-danger">
         <p th:text="${errorPayment}"></p>
-    </div> -->
+    </div>
 
     <div style="text-align: right;" class="mr-5">
         <!-- <form th:action="@{/checkout/applyCoupon}" method="post">
@@ -177,7 +177,7 @@
         </form> -->
     </div>
 
-    <form enctype="multipart/form-data" th:action="@{/cart/placeOrder}" class="checkout" method="post" name="checkout">
+    <form enctype="multipart/form-data" th:action="@{/cart/place-order}" class="checkout" method="post" name="checkout">
         <div class="container">
             <div class="row" id="checkout-container">
                 <!-- Display the success message -->
@@ -227,9 +227,9 @@
                     </th:block>
                 </div>
 
-                <!-- <div th:if="${message}" class="alert alert-danger">
+                <div th:if="${message}" class="alert alert-danger">
                     <p th:text="${message}"></p>
-                </div> -->
+                </div>
 
                 <div  style="background-color:#14213D; padding: 15px; border-radius: 10px;" class="col-md-4 delivery admin-box mt-4">
                     <div class="head">

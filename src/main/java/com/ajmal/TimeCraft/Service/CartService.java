@@ -28,4 +28,9 @@ public interface CartService {
 
     List<Cart> findByUser_Id(Long userId);
 
+    void deleteCart(Cart userCart);
+
+
+    void deleteAllCartItems(User user, List<Cart> cartItems);
+
 }

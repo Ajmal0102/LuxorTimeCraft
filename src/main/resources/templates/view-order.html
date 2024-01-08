@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" th:href="@{/images/logo.png}" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+          crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Order Details</title>
+</head>
+<body style="background-color: #E5E5E5;">
+
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img th:src="@{/images/logo.png}" src="../static/images/logo.png" width="auto" height="40"
+                 class="d-inline-block align-top" alt=""/>
+        </a>
+        <button class="navbar-toggler custom-toggler text-primary" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span style="font-size: 24px; color: #FCA311;" class="navbar-toggler-icon">&#9776;</span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto"></ul>
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link navbar-text" th:href="@{/}" href="#">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link navbar-text" th:href="@{/shop}" href="#">Shop</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link navbar-text" sec:authorize="isAnonymous()" th:href="@{/login}" href="#">Login</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link navbar-text" sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#">Logout</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link navbar-text" th:href="@{/user/userDashboard}" href="#">Profile</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link navbar-text" th:href="@{/cart/goToCart}" href="#">Cart</a>
+                </li>
+                <li class="nav-item active">
+                    <span class="nav-link navbar-text" th:text="${cartCount}">0</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h1 style="color:#FCA311" class="text-center">Order Details</h1>
+    <div th:if="${moneyCredited}" class="alert alert-success mt-3" role="alert">
+        <span th:text="${moneyCredited}"></span>
+    </div>
+    <div th:if="${returnMessage}" class="alert alert-success mt-3" role="alert">
+        <span th:text="${returnMessage}"></span>
+    </div>
+    <div th:if="${successMsg}" class="alert alert-success mt-3" role="alert">
+        <span th:text="${successMsg}"></span>
+    </div>
+
+    <!-- Display order information -->
+    <div class="card mt-4">
+        <div class="card-body">
+            <h2 style="color:#FCA311" class="card-title">Order Information</h2>
+            <hr style="border-color: grey;">
+
+            <p style="color:grey" class="card-text"><strong>Order ID:</strong> <span th:text="${order.orderId}"></span></p>
+            <p style="color:grey" class="card-text"><strong>Order Date:</strong> <span th:text="${order.orderDate}"></span></p>
+            <p style="color:grey" class="card-text"><strong>Total Amount:</strong> ₹<span
+                    th:text="${order.totalPrice}"></span></p>
+            <p style="color:grey" class="card-text"><strong>Order Status: </strong><span
+                    th:text="${order.status}"></span></p>
+            <p style="color:grey" class="card-text"><strong>Payment Method: </strong><span
+                    th:text="${order.paymentMode}"></span></p>
+        </div>
+    </div>
+<!--    <a class="btn btn-success mt-4 ml-3" th:href="@{/invoice/{id}(id=${order.id})}">Download Invoice</a>-->
+    <!-- Display order items -->
+    <div class="card mt-4">
+        <div class="card-body">
+            <h2 style="color:#FCA311" class="card-title">Order Items</h2>
+            <table class="table  table-striped  table-responsive">
+                <thead style="color:white">
+                <tr>
+                    <th>Preview</th>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Unit Price (₹)</th>
+                    <th>Subtotal (₹)</th>
+                    <th>Review</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Loop through order items -->
+                <tr th:each="orderItem : ${order.orderItems}">
+                    <td>
+                        <img height="150px" width="150px"
+                             th:src="@{/productImages/{fileName}(fileName=${orderItem.product.imageName})}"
+                             style="object-fit: contain;">
+                    </td>
+                    <td style="color: grey" th:text="${orderItem.product.name}"></td>
+                    <td style="color: grey" th:text="${orderItem.quantity}"></td>
+                    <td style="color: grey" th:text="${orderItem.product.price}"></td>
+                    <td style="color: grey" th:text="${order.totalPrice}"></td>
+                    <td>
+
+
+                        <!-- <a th:if="${order.status.name()} == 'DELIVERED' and ${orderItem.variant.product.reviewExits()==false}"
+                           th:href="@{/review/{orderId}/{productId}(orderId=${order.id},productId=${orderItem.variant.product.id})}"
+                           class="btn btn-success mt-4 ml-2">
+                          Add Review
+                        </a>
+                        <a th:if="${order.status.name()} == 'DELIVERED' and ${orderItem.variant.product.reviewExits()==true}"
+                           th:href="@{/review/{orderId}/{productId}(orderId=${order.id},productId=${orderItem.variant.product.id})}"
+                           class="btn btn-warning mt-4 ml-2">
+                          Edit Review
+                        </a> -->
+
+
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Display shipping address -->
+    <div class="card mt-4">
+        <div class="card-body">
+            <h2 style="color:#FCA311" class="card-title">Shipping Address</h2>
+            <hr style="border-color: grey;">
+            <p style="color:grey" class="card-text">
+                <span th:text="${order.orderedAddress}"></span>,
+                <!--        <span th:text="${order.address.city}"></span>,<br>-->
+                <!--        <span th:text="${order.address.state}"></span>-->
+                <!--        <span th:text="${order.address.pinCode}"></span>,-->
+                <!--        <span th:text="${order.address.landmark}"></span>-->
+            </p>
+            <!-- You can uncomment and add more address details here as needed -->
+        </div>
+    </div>
+
+    <div>
+      <div class="btn-group mt-4" role="group">
+        <a th:if="${order.status.name()} != 'CANCELLED' and ${order.status.name()} !='DELIVERED' and ${order.status.name()}!='RETURN_PENDING' and ${order.status.name()}!='RETURN_CONFIRMED' and ${order.status.name()}!='RETURNED' and ${order.status.name()}!='REFUNDED'"
+           th:href="@{/order/cancel-order/{id}(id=${order.id})}"
+           onclick="if(!(confirm('Are you sure you want to cancel this order?'))) return false"
+           class="btn btn-danger ml-3">Cancel Order</a>
+
+    <!-- Display a link to navigate to the page for selecting the return reason -->
+
+<!--    <a th:if="${order.status.name()} == 'DELIVERED'"-->
+<!--       th:href="@{/order/selectReturnReason/{id}(id=${order.id})}"-->
+<!--       class="btn btn-warning ml-3">Initiate Return</a>-->
+<!--    <a th:if="${order.status.name() == 'RETURN_CONFIRMED'}"-->
+<!--       th:href="@{/order/refund/{id}(id=${order.id})}"-->
+<!--       class="btn btn-success ml-3">Initiate Refund</a>-->
+
+  </div>
+
+    <!-- Display a form for returning the product with a reason -->
+
+
+
+</div>
+
+<!-- Add Review Modal -->
+<!--  <div class="modal fade" id="addReviewModal" tabindex="-1" role="dialog" aria-labelledby="addReviewModalLabel"-->
+<!--       aria-hidden="true">-->
+<!--    <div class="modal-dialog" role="document">-->
+<!--      <div class="modal-content">-->
+<!--        <div class="modal-header">-->
+<!--          <h5 class="modal-title" id="addReviewModalLabel">Add Your Review</h5>-->
+<!--          <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--            <span aria-hidden="true">&times;</span>-->
+<!--          </button>-->
+<!--          <p th:text="'Product ID: ' + ${productId}"></p>-->
+
+<!--        </div>-->
+<!--        <div class="modal-body">-->
+<!--          <form th:action="@{'/review/' + ${productId}}" method="post">-->
+<!--            <input type="hidden" id="orderId" name="orderId" th:value="${order.id}"/>-->
+<!--            <input type="hidden" id="productId" name="productId" th:value="${productId}">-->
+<!--            &lt;!&ndash; Your other form fields go here &ndash;&gt;-->
+<!--            <div class="form-group">-->
+<!--              <label for="comment">Your Comment</label>-->
+<!--              <textarea id="comment" name="comment" rows="4" class="form-control" placeholder="Your comment"></textarea>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--              <label for="rating">Rating</label>-->
+<!--              <select id="rating" name="rating" class="form-control">-->
+<!--                <option value="1">1 star</option>-->
+<!--                <option value="2">2 stars</option>-->
+<!--                <option value="3">3 stars</option>-->
+<!--                <option value="4">4 stars</option>-->
+<!--                <option value="5">5 stars</option>-->
+<!--              </select>-->
+<!--            </div>-->
+<!--            <button type="submit" class="btn btn-success">Submit Review</button>-->
+<!--          </form>-->
+
+
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+</div>
+
+<!-- Customized Footer -->
+<footer class="text-center">
+    <div class="container">
+        <section class="mb-3">
+            <!-- Social Media Links -->
+            <a class="btn btn-outline-warning btn-floating m-1" href="#" role="button">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a class="btn btn-outline-warning btn-floating m-1" href="#" role="button">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a class="btn btn-outline-warning btn-floating m-1" href="#" role="button">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a class="btn btn-outline-warning btn-floating m-1" href="https://github.com/RawanSayedd" target="_blank"
+               role="button">
+                <i class="fab fa-github"></i>
+            </a>
+        </section>
+
+        <!-- Copyright Notice -->
+        <div class="text-center" style="color: #FFD800;">
+            <p>&copy; 2023 All rights reserved ashish</p>
+        </div>
+    </div>
+</footer>
+
+
+<!-- Add these script tags at the bottom of your HTML, just before the closing </body> tag. -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI/tZ1a9JJl3h82g9L4afrZ9r1G8pVr2bYyEXE+3E=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+
+</body>
+</html>

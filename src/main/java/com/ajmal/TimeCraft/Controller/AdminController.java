@@ -2,9 +2,12 @@ package com.ajmal.TimeCraft.Controller;
 
 import com.ajmal.TimeCraft.DTO.ProductDTO;
 import com.ajmal.TimeCraft.Entity.Category;
+import com.ajmal.TimeCraft.Entity.EnumList.Status;
+import com.ajmal.TimeCraft.Entity.Order;
 import com.ajmal.TimeCraft.Entity.Product;
 import com.ajmal.TimeCraft.Entity.User;
 import com.ajmal.TimeCraft.Service.CategoryService;
+import com.ajmal.TimeCraft.Service.OrderService;
 import com.ajmal.TimeCraft.Service.ProductService;
 import com.ajmal.TimeCraft.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,6 +42,11 @@ public class AdminController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    OrderService orderService;
+
+
 
     @GetMapping("/admin")
     public String getAdminHome(){
@@ -202,5 +211,52 @@ public class AdminController {
         }
 
     }
+
+
+    /* User Section Ends */
+
+    @GetMapping("/admin/orders")
+    public String orders(Model model){
+//        List<User> users = userService.findAllUsers();
+//        model.addAttribute("users",users);
+        List<Order> orders = orderService.findAll();
+        orders.sort(Comparator.comparing(Order::getOrderDate).reversed());
+        model.addAttribute("orders",orders);
+        return "admin-order-management";
+    }
+
+    @GetMapping("/admin/update-order-status/{orderId}")
+    public String orderStatus(@PathVariable("orderId") long orderId,
+                              Model model) {
+
+        Optional<Order> optionalOrder = orderService.findByOrderId(orderId);
+
+        if (optionalOrder.isPresent()) {
+            Order order = optionalOrder.get();
+            model.addAttribute("order",order);
+            return "order-status-updation";
+        }
+
+        return "redirect:/admin/orders";
+    }
+
+
+    @PostMapping("/admin/update-order-status/{orderId}")
+    public String postOrderStatus(@PathVariable("orderId") long orderId,
+                                  @RequestParam("status") Status status) {
+
+        Optional<Order> optionalOrder = orderService.findByOrderId(orderId);
+
+        if (optionalOrder.isPresent()) {
+            Order order = optionalOrder.get();
+            order.setStatus(status);
+            orderService.save(order);
+            return "redirect:/admin/orders";
+
+        }
+
+        return "redirect:/admin/orders";
+    }
+
 
 }

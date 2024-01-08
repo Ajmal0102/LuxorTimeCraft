@@ -7,8 +7,6 @@ import com.ajmal.TimeCraft.Repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.event.ListDataEvent;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -110,6 +108,39 @@ public class CartServiceImpl implements CartService {
     @Override
     public List<Cart> findByUser_Id(Long userId) {
         return cartRepository.findByUser_Id(userId);
+    }
+
+    @Override
+    public void deleteCart(Cart userCart) {
+        cartRepository.delete(userCart);
+    }
+
+    @Override
+    public void deleteAllCartItems(User user, List<Cart> cartItems) {
+
+        String email = user.getEmail();
+
+        if (!cartItems.isEmpty()) {
+            // Find the cart item that matches the product ID
+            Cart cartItemToRemove = null;
+            for (Cart cartItem : cartItems) {
+
+                Product product = cartItem.getProduct();
+                Long productId = product.getId();
+
+                if (cartItem.getProduct().getId().equals(productId)) {
+                    cartItemToRemove = cartItem;
+                    break; // Exit the loop after finding a match
+                }
+            }
+
+            if (cartItemToRemove != null) {
+                // Remove the found cart item
+                cartRepository.delete(cartItemToRemove);
+            }
+        }
+
+
     }
 
 

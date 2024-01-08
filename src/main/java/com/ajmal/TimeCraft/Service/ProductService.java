@@ -1,5 +1,6 @@
 package com.ajmal.TimeCraft.Service;
 
+import com.ajmal.TimeCraft.Entity.Cart;
 import com.ajmal.TimeCraft.Entity.Category;
 import com.ajmal.TimeCraft.Entity.Product;
 
@@ -19,4 +20,7 @@ public interface ProductService {
     List<Product> getAllProductsByCategoryId(long id);
 
     Optional<Product> findById(Long productId);
+
+    void reduceProductStock(List<Cart> cartItems);
+
 }

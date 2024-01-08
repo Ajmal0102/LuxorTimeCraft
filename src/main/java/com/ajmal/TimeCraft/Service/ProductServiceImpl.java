@@ -1,5 +1,6 @@
 package com.ajmal.TimeCraft.Service;
 
+import com.ajmal.TimeCraft.Entity.Cart;
 import com.ajmal.TimeCraft.Entity.Product;
 import com.ajmal.TimeCraft.Repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,22 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public Optional<Product> findById(Long productId) {
         return productRepository.findById(productId);
+    }
+
+    @Override
+    public void reduceProductStock(List<Cart> cartItems) {
+
+        for (Cart cartItem: cartItems) {
+            Product product = cartItem.getProduct();
+            int orderQuantity = cartItem.getQuantity();
+            int currentStock = product.getQuantity();
+            if(currentStock >= orderQuantity){
+                product.setQuantity(currentStock-orderQuantity);
+            }else {
+                new RuntimeException("out of stock");
+            }
+            productRepository.save(product);
+
+        }
     }
 }

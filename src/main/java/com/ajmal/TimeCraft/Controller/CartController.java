@@ -1,13 +1,8 @@
 package com.ajmal.TimeCraft.Controller;
 
-import com.ajmal.TimeCraft.Entity.Address;
-import com.ajmal.TimeCraft.Entity.Cart;
-import com.ajmal.TimeCraft.Entity.Product;
-import com.ajmal.TimeCraft.Entity.User;
-import com.ajmal.TimeCraft.Service.AddressService;
-import com.ajmal.TimeCraft.Service.CartService;
-import com.ajmal.TimeCraft.Service.ProductService;
-import com.ajmal.TimeCraft.Service.UserService;
+import com.ajmal.TimeCraft.Entity.*;
+import com.ajmal.TimeCraft.Entity.EnumList.PaymentMode;
+import com.ajmal.TimeCraft.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -38,6 +34,9 @@ public class CartController {
     @Autowired
     AddressService addressService;
 
+    @Autowired
+    OrderService orderService;
+
     @GetMapping("/view-cart")
     public String viewCart(Model model, @AuthenticationPrincipal(expression = "email") String email){
 
@@ -55,43 +54,6 @@ public class CartController {
 
         return "cart";
     }
-
-//    @GetMapping("/add-to-cart/{id}")
-//    public String addToCart(@PathVariable("id") Long productId,
-//                            @AuthenticationPrincipal(expression = "email") String email,
-//                            Model model){
-//
-//        Product product = productService.getProductById(productId).orElse(null);
-//        System.out.println(product);
-//
-//
-//        Optional<User> user = userService.findUserByEmail(email);
-//
-//        User user1=user.get();
-//
-//        int currentStock = product.getQuantity();
-//
-//        if (currentStock>=1) {
-//            Cart existingCartItem = cartService.findCartItem(user1, product);
-//
-//            System.out.println("eeeeeeeeeeeeeee"+existingCartItem);
-//            System.out.println("User: " + user);
-//            System.out.println("Product: " + product);
-//            if (existingCartItem != null) {
-//                System.out.println("Cart is not null");
-//                existingCartItem.setQuantity(existingCartItem.getQuantity() + 1);
-//                cartService.saveToCart(existingCartItem);
-//            } else {
-//
-//                Cart cartItem = new Cart();
-//                cartItem.setProduct(product);
-//                cartItem.setUser(user1);
-//                cartItem.setQuantity(1);
-//                cartService.saveToCart(cartItem);
-//            }
-//        }
-//        return "redirect:/cart/view-cart";
-//    }
 
     @GetMapping("/add-to-cart/{id}")
     public String addToCart(@PathVariable("id") Long productId,
@@ -215,4 +177,89 @@ public class CartController {
 
         return "checkout";
     }
+
+    @PostMapping("/place-order")
+    public String placeOrder(Model model,
+                             @RequestParam(value = "selectedAddressId", required = false) Long addressId,
+                             @RequestParam(value = "paymentMethod", required = false) PaymentMode selectedPaymentMode,
+                             @AuthenticationPrincipal(expression = "id") Long user_id,
+                             Principal principal, RedirectAttributes redirectAttributes) {
+
+        if (addressId == null) {
+            model.addAttribute("errorAddress", "Please select an address.");
+            return "redirect:/cart/checkout";
+        }
+
+        if (principal != null) {
+            Optional<User> optionalUser= userService.findById(user_id);
+            if (optionalUser.isPresent()) {
+                User user = optionalUser.get();
+
+                List<Cart> cartItems = cartService.findByUser_Id(user_id);
+
+                double totalPrice = cartService.findTotal(cartItems);
+
+
+                Optional<Address> optionalUserAddress = addressService.findAddressById(addressId);
+                if (optionalUserAddress.isPresent()) {
+                    Address userAddress = optionalUserAddress.get();
+                    try {
+
+
+
+                        if (isCod(selectedPaymentMode)) {
+                            Order order = orderService.saveOrder(user, cartItems, totalPrice, selectedPaymentMode, userAddress);
+                            LocalDate expectedDeliveryDate = order.getOrderDate().plusDays(7);
+                            handleCodPayment(model, user, cartItems, order, expectedDeliveryDate);
+                            return "order-confirmation";
+                        }
+                        else {
+                            redirectAttributes.addFlashAttribute("error", "payment method not selected");
+                            return "redirect:/cart/checkout";
+                        }
+
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }
+        return "redirect:/login";
+    }
+
+
+
+
+
+
+    private static boolean isCod(PaymentMode selectedPaymentMode) {
+        return selectedPaymentMode == PaymentMode.COD;
+    }
+
+    private  static  boolean isRazorpay(PaymentMode selectedPaymentMode){
+        return selectedPaymentMode == PaymentMode.RAZORPAY;
+    }
+
+    private static  boolean isWalletPay(PaymentMode selectedPaymentMode){
+        return selectedPaymentMode == PaymentMode.WALLET;
+    }
+
+    private void handleCodPayment(Model model,
+                                  User user,
+                                  List<Cart> cartItems,
+                                  Order order,
+                                  LocalDate expectedDeliveryDate) {
+
+        productService.reduceProductStock(cartItems);
+        cartService.deleteAllCartItems(user, cartItems);
+
+        model.addAttribute("order", order);
+        model.addAttribute("expectedDeliveryDate", expectedDeliveryDate);
+
+
+    }
+
 }

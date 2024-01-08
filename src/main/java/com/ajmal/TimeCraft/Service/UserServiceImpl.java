@@ -1,5 +1,6 @@
 package com.ajmal.TimeCraft.Service;
 
+import com.ajmal.TimeCraft.Entity.Cart;
 import com.ajmal.TimeCraft.Entity.Role;
 import com.ajmal.TimeCraft.Entity.User;
 import com.ajmal.TimeCraft.otp.model.Otp;
@@ -68,7 +69,7 @@ public class UserServiceImpl implements UserService{
 
         String otp= otpUtil.generateOtp();
         sendEmail.send(user.getEmail(),otp);
-System.out.println("in post register");
+        System.out.println("in post register");
         Otp otp1=new Otp();
 
         otp1.setOtp(otp);
@@ -100,6 +101,7 @@ System.out.println("in post register");
         return 9;
 
     }
+
 
 
 

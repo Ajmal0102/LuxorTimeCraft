@@ -27,4 +27,9 @@ public class Address {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+
+    public String getFullAddress(){
+        return houseName+", "+city+", "+state+", "+pincode+", "+landmark;
+    }
 }
