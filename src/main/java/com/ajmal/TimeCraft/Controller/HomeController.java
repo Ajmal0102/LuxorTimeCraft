@@ -1,6 +1,7 @@
 package com.ajmal.TimeCraft.Controller;
 
 import com.ajmal.TimeCraft.Entity.Order;
+import com.ajmal.TimeCraft.Entity.Product;
 import com.ajmal.TimeCraft.Entity.User;
 import com.ajmal.TimeCraft.Service.CategoryService;
 import com.ajmal.TimeCraft.Service.OrderService;
@@ -31,26 +32,34 @@ public class HomeController {
     OrderService orderService;
     @GetMapping({"/","/home"})
     public String home(Model model){
+        List<Product> productList =productService.getAllProducts().stream().
+                filter(address -> !address.isDelete()).toList();
         model.addAttribute("categories", categoryService.getAllCategory());
-        model.addAttribute("products", productService.getAllProducts());
+        model.addAttribute("products", productList);
         return "index";
     }
     @GetMapping("/home/category/{id}")
     public String shopByCategoryHome(@PathVariable int id, Model model){
+        List<Product> productList =productService.getAllProductsByCategoryId(id).stream().
+                filter(address -> !address.isDelete()).toList();
         model.addAttribute("categories", categoryService.getAllCategory());
-        model.addAttribute("products", productService.getAllProductsByCategoryId(id));
+        model.addAttribute("products", productList );
         return "index";
     }
     @GetMapping("/shop")
     public String shop(Model model){
+        List<Product> productList =productService.getAllProducts().stream().
+                filter(address -> !address.isDelete()).toList();
         model.addAttribute("categories", categoryService.getAllCategory());
-        model.addAttribute("products", productService.getAllProducts());
+        model.addAttribute("products", productList);
         return "shop";
     }
     @GetMapping("/shop/category/{id}")
     public String shopByCategory(@PathVariable int id, Model model){
+        List<Product> productList =productService.getAllProductsByCategoryId(id).stream().
+                filter(address -> !address.isDelete()).toList();
         model.addAttribute("categories", categoryService.getAllCategory());
-        model.addAttribute("products", productService.getAllProductsByCategoryId(id));
+        model.addAttribute("products",productList );
         return "shop";
     }
 

@@ -144,10 +144,16 @@ public class AdminController {
         return "redirect:/admin/products";
     }
 
-    @GetMapping("/admin/product/delete/{id}")
-    public String deleteProduct(@PathVariable long id) {
+    @GetMapping("/admin/product/unlist/{id}")
+    public String unListProduct(@PathVariable long id) {
 
-        productService.deleteProductById(id);
+        productService.unlistProductById(id);
+        return "redirect:/admin/products";
+    }
+    @GetMapping("/admin/product/list/{id}")
+    public String listProduct(@PathVariable long id) {
+
+        productService.listProductById(id);
         return "redirect:/admin/products";
     }
 
@@ -215,6 +221,7 @@ public class AdminController {
 
     /* User Section Ends */
 
+    /* Order Section Start */
     @GetMapping("/admin/orders")
     public String orders(Model model){
 //        List<User> users = userService.findAllUsers();

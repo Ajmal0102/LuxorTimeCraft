@@ -212,6 +212,9 @@ public class CartController {
                             LocalDate expectedDeliveryDate = order.getOrderDate().plusDays(7);
                             handleCodPayment(model, user, cartItems, order, expectedDeliveryDate);
                             return "order-confirmation";
+                        } else if (isRazorpay(selectedPaymentMode)) {
+                            return "redirect:/payment/" + totalPrice + "?addressId=" + addressId + "&selectedPaymentMode=" + selectedPaymentMode;
+
                         }
                         else {
                             redirectAttributes.addFlashAttribute("error", "payment method not selected");
