@@ -35,12 +35,14 @@ public class Order {
     @JoinColumn(name = "address_id")
     Address address;
 
+//    @Column(length = 20)
     @Enumerated(EnumType.STRING)
     PaymentMode paymentMode;
 
-    @Column(length = 20) // Adjust the length according to your needs
+//    @Column(length = 20) // Adjust the length according to your needs
     @Enumerated(EnumType.STRING)
     Status status;
+
     Double totalPrice;
 
     private String orderedAddress;

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment</title>
+</head>
+<body>
+
+
+<!--<button id="rzp-button1">Pay with Razorpay</button>-->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script th:inline="javascript">
+    window.onload = function(e){
+
+  var options = {
+      "key": "rzp_test_MNnp3fJToM6Dfn", // Enter the Key ID generated from the Dashboard
+      "amount": [[${amount}]], // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      "currency": "INR",
+      "name": "LuxorTimeCraft",
+      "order_id": [[${orderId}]], //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      "handler": function (response){
+       var addressId = [[${addressId}]]
+       var paymentMethod = [[${selectedPaymentMode}]]
+       var totalamount =[[${totalAmount}]]
+     window.location.href = '/razorPaySuccess?addressId='+addressId + '&selectedPaymentMode='+paymentMethod +'&totalAmount='+totalamount;
+     },
+      "prefill": {
+          "name": "Gaurav Kumar",
+          "email": "gaurav.kumar@example.com",
+          "contact": "9000090000"
+      },
+      "notes": {
+          "address": "Razorpay Corporate Office"
+      },
+      "theme": {
+          "color": "#3399cc"
+      }
+  };
+  var rzp1 = new Razorpay(options);
+      rzp1.open();
+      e.preventDefault();
+  }
+</script>
+</body>
+</html>

@@ -13,7 +13,7 @@ public interface ProductService {
 
     void addProduct(Product product);
 
-    void deleteProductById(long id);
+    void unlistProductById(long id);
 
     Optional<Product> getProductById(long id);
 
@@ -22,5 +22,7 @@ public interface ProductService {
     Optional<Product> findById(Long productId);
 
     void reduceProductStock(List<Cart> cartItems);
+
+    void listProductById(long id);
 
 }
